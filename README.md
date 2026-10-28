@@ -2,7 +2,7 @@
 
 Publication directory addon for Recording Studio 4.x hosts.
 
-This gem is the `recording_studio_publications` engine (`RecordingStudioPublications`). Version 0.4.1 restores the publications section widgets (totals and over-time charts for titles and articles) and buttons to both inventories. Version 0.4.0 adds `PublishedArticle` children under each title, an article index, and optional Attachable screenshots. Version 0.3.0 added Publishable on each title, a public page at `/publications/:uuid/:slug`, and family-management composition. It keeps the 0.2 grant-less shared catalogue and family-admin CRUD, and pins Accessible `~> 0.9`, Attachable `~> 0.5`, Publishable `~> 0.3`, and Flatpack `~> 0.1.143`. It does not ship Featured In or a per-title Manage-access UI.
+This gem is the `recording_studio_publications` engine (`RecordingStudioPublications`). Version 0.4.3 drops the dummy PageNav `anchor_url` shim and tests against FlatPack `v0.1.329` while the gemspec floor stays `~> 0.1.143`. Version 0.4.1 restores the publications section widgets (totals and over-time charts for titles and articles) and buttons to both inventories. Version 0.4.0 adds `PublishedArticle` children under each title, an article index, and optional Attachable screenshots. Version 0.3.0 added Publishable on each title, a public page at `/publications/:uuid/:slug`, and family-management composition. It keeps the 0.2 grant-less shared catalogue and family-admin CRUD, and pins Accessible `~> 0.9`, Attachable `~> 0.5`, Publishable `~> 0.3`, and Flatpack `~> 0.1.143`. It does not ship Featured In or a per-title Manage-access UI.
 
 ## What's Included
 
@@ -156,7 +156,7 @@ All views use FlatPack ViewComponents. The live reference is [flatpack.bowerbird
 11. Add `recording_studio_publishable ~> 0.3`, install its migrations, and mount `RecordingStudioPublishable::Engine` at `/`. Call `RecordingStudioPublications::FamilyManagement.install!` from a host initializer. Scan Publishable views and components in Tailwind `@source`.
 12. Bootstrap first-owner admin access on the AdminRoot recording.
 
-Authenticated dummy home and docs use Flatpack `flat_pack_sidebar`, like other Recording Studio gems. Publication and article new/show/edit stay on `RecordingStudio::UsesDefaultLayout`. Inventory Show, Edit, and Publication links pass `anchor_url` from that list so Close, Cancel, and save return there instead of walking the action stack. If core puts `data-theme` on `<body>`, render `layouts/_default_layout_head` from the `recording_studio/default_layout_head` hook so `<html>` gets `data-theme="rounded"`. Do not put Sign out or a workspace switcher in that default-layout slot; those belong on the host sidebar. Dummy maps layout `anchor_url` to Flatpack `anchor_href` in `config/initializers/flatpack_page_nav_url_aliases.rb`.
+Authenticated dummy home and docs use Flatpack `flat_pack_sidebar`, like other Recording Studio gems. Publication and article new/show/edit stay on `RecordingStudio::UsesDefaultLayout`. Inventory Show, Edit, and Publication links pass `anchor_url` from that list so Close, Cancel, and save return there instead of walking the action stack. If core puts `data-theme` on `<body>`, render `layouts/_default_layout_head` from the `recording_studio/default_layout_head` hook so `<html>` gets `data-theme="rounded"`. Do not put Sign out or a workspace switcher in that default-layout slot; those belong on the host sidebar.
 
 ## Out of scope
 
@@ -181,7 +181,7 @@ Authenticated dummy home and docs use Flatpack `flat_pack_sidebar`, like other R
 | Attachable      | `~> 0.5` (dummy GitHub tag `v0.5.0`) |
 | Publishable     | `~> 0.3` (dummy GitHub tag `v0.3.0`) |
 | Root Switchable | dummy GitHub tag `v0.5.0` |
-| FlatPack        | `~> 0.1.143` (dummy GitHub tag `v0.1.143`) |
+| FlatPack        | `~> 0.1.143` (dummy GitHub tag `v0.1.329`) |
 | Devise          | latest  |
 
 ## Documentation

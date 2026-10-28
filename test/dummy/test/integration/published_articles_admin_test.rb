@@ -113,6 +113,11 @@ class PublishedArticlesAdminTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes response.body, "House in the Rainforest"
     assert_includes response.body, "House in the Rainforest screenshot"
+    article_href = recording_studio_publications.admin_publication_article_path(
+      publication_recording,
+      article_recording
+    )
+    assert_select "a.fp-card-hover-strong[href='#{article_href}']", minimum: 1
 
     get recording_studio_publications.admin_publication_articles_path(publication_recording, params: { q: "Rainforest" })
     assert_response :success

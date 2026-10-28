@@ -9,8 +9,12 @@
 - Admin `~> 2.0` (dummy GitHub tag `2.0.1`)
 - Attachable `~> 0.5` (dummy GitHub tag `v0.5.0`)
 - Publishable `~> 0.3` (dummy GitHub tag `v0.3.0`)
-- FlatPack `~> 0.1.143` (dummy GitHub tag `v0.1.143`)
+- FlatPack `~> 0.1.143` (dummy GitHub tag `v0.1.329`)
 - Public RubyGems and GitHub access for dependency installation
+
+## Publications 0.4.3
+
+Bump to `0.4.3`. Dummy no longer ships `config/initializers/flatpack_page_nav_url_aliases.rb`. Development and dummy Gemfiles pin FlatPack `v0.1.329`. The gemspec floor stays `~> 0.1.143` because this gem talks to PageNav through `recording_studio_page_nav`, not `FlatPack::PageNav::Component`. Hosts on FlatPack `>= 0.1.274` should drop any copy of that alias initializer. Cards no longer pass `style:`; use `hover:` / `border:` (or omit for default).
 
 ## Publications 0.4.1
 

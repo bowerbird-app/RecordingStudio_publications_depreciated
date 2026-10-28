@@ -4,7 +4,7 @@
 <% href = admin_publication_article_path(publication_recording, entry.recording) %>
 <% preview_path = article_screenshot_preview_path(entry.screenshot_recording) %>
 
-<%= render FlatPack::Card::Component.new(style: :interactive, clickable: true, href: preserve_anchor_url(href)) do |card| %>
+<%= render FlatPack::Card::Component.new(hover: :strong, clickable: true, href: preserve_anchor_url(href)) do |card| %>
   <% if preview_path.present? %>
     <% card.media(aspect_ratio: "16/9", padding: :none) do %>
       <%= image_tag preview_path, alt: "#{article.title} screenshot", class: "h-full w-full object-cover" %>

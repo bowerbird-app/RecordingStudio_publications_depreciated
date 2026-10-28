@@ -4,7 +4,7 @@ require "test_helper"
 
 class RecordingStudioPublicationsTest < Minitest::Test
   def test_version_matches_release
-    assert_equal "0.4.1", ::RecordingStudioPublications::VERSION
+    assert_equal "0.4.3", ::RecordingStudioPublications::VERSION
   end
 
   def test_engine_exists
@@ -32,7 +32,7 @@ class RecordingStudioPublicationsTest < Minitest::Test
     assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_publishable", tag: "v0.3.0"'
     assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_admin", tag: "2.0.1"'
     assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_root_switchable", tag: "v0.5.0"'
-    assert_includes gemfile, 'github: "bowerbird-app/flatpack", tag: "v0.1.143"'
+    assert_includes gemfile, 'github: "bowerbird-app/flatpack", tag: "v0.1.329"'
     refute_includes gemfile, "recording_studio/v3.0.0"
     refute_includes gemfile, 'tag: "v0.1.144"'
     refute_includes gemfile, 'tag: "0.3.1"'
@@ -127,10 +127,9 @@ class RecordingStudioPublicationsTest < Minitest::Test
     assert File.exist?(File.expand_path("dummy/app/views/layouts/flat_pack/_top_nav.html.erb", __dir__))
     assert_includes gem_controller_source, "layout \"recording_studio/default_layout\""
     assert_includes default_layout_initializer, "RecordingStudio::ApplicationController.include(RecordingStudio::UsesDefaultLayout)"
-    page_nav_aliases = File.read(
+    refute File.exist?(
       File.expand_path("dummy/config/initializers/flatpack_page_nav_url_aliases.rb", __dir__)
     )
-    assert_includes page_nav_aliases, "kwargs[:anchor_href] = kwargs[:anchor_url]"
   end
 
   def test_dummy_login_layout_keeps_flatpack_assets_without_tight_main_offset
@@ -235,6 +234,9 @@ class RecordingStudioPublicationsTest < Minitest::Test
     assert_includes view_source, 'title: "Publication directory"'
     assert_includes view_source, "shared publications catalogue"
     assert_includes view_source, "FlatPack::Card::Component"
+    assert_includes view_source, "border: :strong"
+    refute_includes view_source, "style: :default"
+    refute_includes view_source, "style: :outlined"
     refute_includes view_source, "dummy_page_nav"
     refute_includes view_source, 'title: "Demo"'
     refute_includes view_source, "FlatPack::Breadcrumb::Component"
@@ -319,5 +321,29 @@ class RecordingStudioPublicationsTest < Minitest::Test
     assert_includes paths, "publication_types"
     assert_includes controller, "def action_close_url"
     assert_includes show, "action_close_url(default: inventory_path)"
+  end
+
+  def test_flatpack_callers_use_native_card_and_page_nav_helpers
+    article_card = File.read(
+      File.expand_path("../app/views/recording_studio_publications/published_articles/_article_card.html.erb", __dir__)
+    )
+    screen_show = File.read(
+      File.expand_path("../app/overrides/recording_studio_admin/screens/show.html.erb", __dir__)
+    )
+    sources = Dir[
+      File.expand_path("../app/**/*.{rb,erb}", __dir__),
+      File.expand_path("../lib/**/*.{rb,erb}", __dir__),
+      File.expand_path("dummy/app/**/*.{rb,erb}", __dir__)
+    ].map { |path| File.read(path) }
+
+    assert_includes article_card, "hover: :strong"
+    refute_includes article_card, "style: :interactive"
+    assert_includes screen_show, "border: :strong"
+    refute_includes screen_show, "style: :outlined"
+    refute_includes screen_show, "FlatPack::PageNav::Component"
+    sources.each do |source|
+      refute_match(/Card::Component\.new\([^)]*style:/, source)
+      refute_includes source, "FlatPack::PageNav::Component.new"
+    end
   end
 end

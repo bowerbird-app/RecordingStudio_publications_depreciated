@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.3] - 2026-10-28
+
+Dummy tests FlatPack native PageNav. The gemspec floor stays `~> 0.1.143`.
+
+### Removed
+- Dummy initializer `config/initializers/flatpack_page_nav_url_aliases.rb`. FlatPack `>= 0.1.274` rejects the old `anchor_url` / `back_url` keywords, so the alias shim raises instead of mapping Close
+
+### Changed
+- Development and dummy Gemfiles pin FlatPack GitHub tag `v0.1.329` (lockfiles follow). Gem callers still use `recording_studio_page_nav(page_nav_anchor_url:)`, not `FlatPack::PageNav::Component` directly, so the gemspec stays `~> 0.1.143`
+- Gem and dummy `FlatPack::Card::Component` callers no longer pass the removed `style:` keyword (`interactive` → `hover: :strong`, `outlined` → `border: :strong`, `default` omitted). That unblocks current FlatPack; older FlatPack only changes visuals
+
+### Upgrade notes
+- Bump to `0.4.3`
+- Drop any host copy of the dummy PageNav `anchor_url` alias if you are on FlatPack `>= 0.1.274`. This gem does not require that native API at runtime
+- On FlatPack that rejects Card `style:`, stop passing it. Mapping: outlined → `border: :strong`; elevated → `shadow: :md`; flat → `background: :shaded, border: :none`; interactive → `hover: :strong`; list → `hover: :subtle`; default → omit the keyword
+
 ## [0.4.1] - 2026-09-18
 
 Publications section widgets, inventory chart title, and article edit layout.
@@ -153,7 +169,8 @@ First `recording_studio_publications` identity. This release is rename, dependen
 - Keep `RecordingStudio::UsesDefaultLayout` for authenticated screens. If core puts theme on `body`, render `layouts/_default_layout_head` from the `recording_studio/default_layout_head` hook so `html` gets `data-theme="rounded"`
 - Do not put Sign out or a workspace switcher in the default-layout slot or that head partial
 
-[Unreleased]: https://github.com/bowerbird-app/RecordingStudio_publications/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/bowerbird-app/RecordingStudio_publications/compare/v0.4.3...HEAD
+[0.4.3]: https://github.com/bowerbird-app/RecordingStudio_publications/releases/tag/v0.4.3
 [0.4.1]: https://github.com/bowerbird-app/RecordingStudio_publications/releases/tag/v0.4.1
 [0.4.0]: https://github.com/bowerbird-app/RecordingStudio_publications/releases/tag/v0.4.0
 [0.3.0]: https://github.com/bowerbird-app/RecordingStudio_publications/releases/tag/v0.3.0

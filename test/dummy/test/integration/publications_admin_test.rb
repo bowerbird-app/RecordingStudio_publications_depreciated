@@ -169,6 +169,7 @@ class PublicationsAdminTest < ActionDispatch::IntegrationTest
     assert_includes response.body, 'name="publication_type"'
     assert_includes response.body, "Publication type"
     assert_includes response.body, "screen-chart"
+    assert_select "#screen-chart .fp-card.border-2", minimum: 1
     refute_includes response.body, "widgets.publications.over_time"
     refute_includes response.body, ">Publications</h3>"
 
