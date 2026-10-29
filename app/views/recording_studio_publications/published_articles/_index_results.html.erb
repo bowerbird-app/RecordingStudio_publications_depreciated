@@ -10,7 +10,7 @@
     icon: :inbox
   ) do |empty_state| %>
     <% if new_article_action %>
-      <% empty_state.slot do %>
+      <% empty_state.item do %>
         <%= render FlatPack::Button::Component.new(
           text: "Add article",
           href: preserve_anchor_url(new_admin_publication_article_path(publication_recording)),

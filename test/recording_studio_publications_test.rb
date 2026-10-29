@@ -26,11 +26,13 @@ class RecordingStudioPublicationsTest < Minitest::Test
   def test_dummy_gemfile_pins_verified_4x_github_tags
     gemfile = File.read(File.expand_path("dummy/Gemfile", __dir__))
 
-    assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio", tag: "v4.2.0"'
+    assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio", tag: "v4.7.1"'
     assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_accessible", tag: "v0.9.0"'
     assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_attachable", tag: "v0.5.0"'
     assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_publishable", tag: "v0.3.0"'
-    assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_admin", tag: "2.0.1"'
+    assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_admin", tag: "v2.5.1"'
+    assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_trashable", tag: "v0.10.1"'
+    assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_metrics", tag: "v0.2.3"'
     assert_includes gemfile, 'github: "bowerbird-app/RecordingStudio_root_switchable", tag: "v0.5.0"'
     assert_includes gemfile, 'github: "bowerbird-app/flatpack", tag: "v0.1.329"'
     refute_includes gemfile, "recording_studio/v3.0.0"
@@ -330,17 +332,37 @@ class RecordingStudioPublicationsTest < Minitest::Test
     screen_show = File.read(
       File.expand_path("../app/overrides/recording_studio_admin/screens/show.html.erb", __dir__)
     )
+    dummy_views = File.expand_path("dummy/app/views", __dir__)
+    dummy_root_switch_path = File.join(dummy_views, "recording_studio_root_switchable/root_switches/show.html.erb")
+    dummy_native_page_nav = [
+      dummy_root_switch_path,
+      *Dir[File.join(dummy_views, "recording_studio_attachable/**/*.html.erb")]
+    ]
+    dummy_root_switch = File.read(dummy_root_switch_path)
     sources = Dir[
       File.expand_path("../app/**/*.{rb,erb}", __dir__),
       File.expand_path("../lib/**/*.{rb,erb}", __dir__),
       File.expand_path("dummy/app/**/*.{rb,erb}", __dir__)
-    ].map { |path| File.read(path) }
+    ].reject { |path| dummy_native_page_nav.include?(path) }.map { |path| File.read(path) }
 
     assert_includes article_card, "hover: :strong"
     refute_includes article_card, "style: :interactive"
     assert_includes screen_show, "border: :strong"
     refute_includes screen_show, "style: :outlined"
     refute_includes screen_show, "FlatPack::PageNav::Component"
+    dummy_native_page_nav.each do |path|
+      source = File.read(path)
+      assert_includes source, "page_nav.with_close"
+      refute_includes source, "anchor_label:"
+      refute_includes source, "anchor_url:"
+      refute_includes source, "back_icon:"
+    end
+    refute_match(/Card::Component\.new\([^)]*style:/, dummy_root_switch)
+    index_results = File.read(
+      File.expand_path("../app/views/recording_studio_publications/published_articles/_index_results.html.erb", __dir__)
+    )
+    assert_includes index_results, "empty_state.item"
+    refute_includes index_results, "empty_state.slot"
     sources.each do |source|
       refute_match(/Card::Component\.new\([^)]*style:/, source)
       refute_includes source, "FlatPack::PageNav::Component.new"

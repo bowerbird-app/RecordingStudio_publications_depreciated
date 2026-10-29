@@ -4,9 +4,9 @@
 
 - Ruby 3.3 or newer
 - Rails 8.1 or newer
-- Recording Studio 4.x (`~> 4.2` in the gemspec; dummy GitHub tag `v4.2.0`)
+- Recording Studio 4.x (`~> 4.2` in the gemspec; dummy GitHub tag `v4.7.1`)
 - Accessible `~> 0.9` (dummy GitHub tag `v0.9.0`)
-- Admin `~> 2.0` (dummy GitHub tag `2.0.1`)
+- Admin `~> 2.0` (dummy GitHub tag `v2.5.1`; hosts stay at or below 2.5.1)
 - Attachable `~> 0.5` (dummy GitHub tag `v0.5.0`)
 - Publishable `~> 0.3` (dummy GitHub tag `v0.3.0`)
 - FlatPack `~> 0.1.143` (dummy GitHub tag `v0.1.329`)
@@ -14,7 +14,7 @@
 
 ## Publications 0.4.3
 
-Bump to `0.4.3`. Dummy no longer ships `config/initializers/flatpack_page_nav_url_aliases.rb`. Development and dummy Gemfiles pin FlatPack `v0.1.329`. The gemspec floor stays `~> 0.1.143` because this gem talks to PageNav through `recording_studio_page_nav`, not `FlatPack::PageNav::Component`. Hosts on FlatPack `>= 0.1.274` should drop any copy of that alias initializer. Cards no longer pass `style:`; use `hover:` / `border:` (or omit for default).
+Bump to `0.4.3`. Dummy no longer ships `config/initializers/flatpack_page_nav_url_aliases.rb`. Development and dummy Gemfiles pin FlatPack `v0.1.329` and Recording Studio `v4.7.1`. The gemspec floors stay FlatPack `~> 0.1.143` and Recording Studio `~> 4.2`. Dummy overrides the Root Switchable `v0.5.0` switch page so Close uses `with_close`. Hosts on FlatPack `>= 0.1.274` should drop any copy of that alias initializer and use Recording Studio `>= 4.7.1` for default-layout PageNav. Cards no longer pass `style:`; use `hover:` / `border:` (or omit for default).
 
 ## Publications 0.4.1
 

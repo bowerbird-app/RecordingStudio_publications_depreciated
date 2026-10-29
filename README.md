@@ -2,7 +2,7 @@
 
 Publication directory addon for Recording Studio 4.x hosts.
 
-This gem is the `recording_studio_publications` engine (`RecordingStudioPublications`). Version 0.4.3 drops the dummy PageNav `anchor_url` shim and tests against FlatPack `v0.1.329` while the gemspec still allows FlatPack `v0.1.143` (`~> 0.1.143`). Version 0.4.1 restores the publications section widgets (totals and over-time charts for titles and articles) and buttons to both inventories. Version 0.4.0 adds `PublishedArticle` children under each title, an article index, and optional Attachable screenshots. Version 0.3.0 added Publishable on each title, a public page at `/publications/:uuid/:slug`, and family-management composition. It keeps the 0.2 grant-less shared catalogue and family-admin CRUD, and pins Accessible `~> 0.9`, Attachable `~> 0.5`, Publishable `~> 0.3`, and Flatpack `~> 0.1.143`. It does not ship Featured In or a per-title Manage-access UI.
+This gem is the `recording_studio_publications` engine (`RecordingStudioPublications`). Version 0.4.3 drops the dummy PageNav `anchor_url` shim and tests against FlatPack `v0.1.329` while the gemspec still allows FlatPack `v0.1.143` (`~> 0.1.143`). Dummy Recording Studio is GitHub tag `v4.7.1`; the gemspec floor stays `~> 4.2` (`v4.2.0`). Version 0.4.1 restores the publications section widgets (totals and over-time charts for titles and articles) and buttons to both inventories. Version 0.4.0 adds `PublishedArticle` children under each title, an article index, and optional Attachable screenshots. Version 0.3.0 added Publishable on each title, a public page at `/publications/:uuid/:slug`, and family-management composition. It keeps the 0.2 grant-less shared catalogue and family-admin CRUD, and pins Accessible `~> 0.9`, Attachable `~> 0.5`, Publishable `~> 0.3`, and Flatpack `~> 0.1.143`. It does not ship Featured In or a per-title Manage-access UI.
 
 ## What's Included
 
@@ -175,9 +175,9 @@ Authenticated dummy home and docs use Flatpack `flat_pack_sidebar`, like other R
 | Rails           | 8.1+    |
 | PostgreSQL      | 16      |
 | TailwindCSS     | 4       |
-| RecordingStudio | 4.x (`~> 4.2` in the gemspec; dummy GitHub tag `v4.2.0`) |
+| RecordingStudio | 4.x (`~> 4.2` / tag `v4.2.0` floor in the gemspec; dummy GitHub tag `v4.7.1`) |
 | Accessible      | `~> 0.9` (dummy GitHub tag `v0.9.0`) |
-| Admin           | `~> 2.0` (dummy GitHub tag `2.0.1`) |
+| Admin           | `~> 2.0` (dummy GitHub tag `v2.5.1`; hosts stay at or below 2.5.1) |
 | Attachable      | `~> 0.5` (dummy GitHub tag `v0.5.0`) |
 | Publishable     | `~> 0.3` (dummy GitHub tag `v0.3.0`) |
 | Root Switchable | dummy GitHub tag `v0.5.0` |
