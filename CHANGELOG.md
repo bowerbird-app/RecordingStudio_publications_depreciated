@@ -7,24 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.4.3] - 2026-10-28
+## [0.4.3] - 2026-10-29
 
-Dummy tests FlatPack native PageNav. The gemspec floor stays `~> 0.1.143`.
+Dummy tests FlatPack native PageNav. Public dependency floor change: `flat_pack` `>= 0.1.246` (`~> 0.1.246`).
 
 ### Removed
 - Dummy initializer `config/initializers/flatpack_page_nav_url_aliases.rb`. FlatPack `>= 0.1.274` rejects the old `anchor_url` / `back_url` keywords, so the alias shim raises instead of mapping Close
 
 ### Changed
-- Development and dummy Gemfiles pin FlatPack GitHub tag `v0.1.329` (lockfiles follow). Gem callers still use `recording_studio_page_nav(page_nav_anchor_url:)`, not `FlatPack::PageNav::Component` directly, so the gemspec stays `~> 0.1.143`
+- Public `flat_pack` gemspec floor is `~> 0.1.246` (`>= 0.1.246`). Shipped EmptyState `item` and Card `border:` / `hover:` need that floor
+- Development and dummy Gemfiles pin FlatPack GitHub tag `v0.1.329` (lockfiles follow). Gem callers still use `recording_studio_page_nav(page_nav_anchor_url:)`, not `FlatPack::PageNav::Component` directly
 - Dummy and development pin Recording Studio GitHub tag `v4.7.1` (gemspec stays `~> 4.2`). 4.2.0’s default layout still passes PageNav `back_icon` / `anchor_label`; 4.7.1 uses `with_back` / `with_close`
 - Dummy pins Admin `v2.5.1` (at the host ceiling) plus Trashable `v0.10.1` and Metrics `v0.2.3` so section widgets use Card `border: :strong` instead of `style:`
 - Dummy overrides Root Switchable `v0.5.0` `root_switches/show` and Attachable `v0.5.0` upload/show so Close uses `with_close` (those engine templates still pass keywords FlatPack `v0.1.329` rejects)
-- Article empty state uses EmptyState `item` (FlatPack `v0.1.329` dropped `slot`)
+- Article empty state uses EmptyState `item` (FlatPack `v0.1.246` added `item`; `v0.1.329` dropped `slot`)
 - Dummy lockfile takes `crass` `>= 1.0.8` and `net-ssh` `>= 7.3.5` for Bundler Audit
-- Gem and dummy `FlatPack::Card::Component` callers no longer pass the removed `style:` keyword (`interactive` → `hover: :strong`, `outlined` → `border: :strong`, `default` omitted). That unblocks current FlatPack; older FlatPack only changes visuals
+- Gem and dummy `FlatPack::Card::Component` callers no longer pass the removed `style:` keyword (`interactive` → `hover: :strong`, `outlined` → `border: :strong`, `default` omitted)
 
 ### Upgrade notes
 - Bump to `0.4.3`
+- Hosts need FlatPack `>= 0.1.246` (`~> 0.1.246`)
 - Drop any host copy of the dummy PageNav `anchor_url` alias if you are on FlatPack `>= 0.1.274`. This gem does not require that native API at runtime
 - On FlatPack that rejects Card `style:`, stop passing it. Mapping: outlined → `border: :strong`; elevated → `shadow: :md`; flat → `background: :shaded, border: :none`; interactive → `hover: :strong`; list → `hover: :subtle`; default → omit the keyword
 - Dummy/dev Recording Studio pin is `v4.7.1` so default-layout PageNav matches FlatPack `>= 0.1.274`. Hosts that still pin `v4.2.0` with FlatPack `>= 0.1.274` need that 4.7.1 layout (or their own `with_back` / `with_close` override)

@@ -20,7 +20,7 @@ class RecordingStudioPublicationsTest < Minitest::Test
     assert_includes gemspec, 'spec.add_dependency "recording_studio_admin", "~> 2.0"'
     assert_includes gemspec, 'spec.add_dependency "recording_studio_attachable", "~> 0.5"'
     assert_includes gemspec, 'spec.add_dependency "recording_studio_publishable", "~> 0.3"'
-    assert_includes gemspec, 'spec.add_dependency "flat_pack", "~> 0.1.143"'
+    assert_includes gemspec, 'spec.add_dependency "flat_pack", "~> 0.1.246"'
   end
 
   def test_dummy_gemfile_pins_verified_4x_github_tags
@@ -222,7 +222,7 @@ class RecordingStudioPublicationsTest < Minitest::Test
 
     assert_includes readme, "RecordingStudio"
     assert_includes readme, "v4.2.0"
-    assert_includes readme, "v0.1.143"
+    assert_includes readme, "v0.1.246"
     refute_includes readme, "v3 declarations"
     refute_includes readme, "RecordingStudio v3"
     refute_includes readme, "ExampleService"

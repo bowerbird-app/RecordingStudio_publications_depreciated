@@ -60,7 +60,7 @@ PATH
   remote: .
   specs:
     recording_studio_publications (0.4.3)
-      flat_pack (~> 0.1.143)
+      flat_pack (~> 0.1.246)
       rails (~> 8.1.0)
       recording_studio (~> 4.2)
       recording_studio_accessible (~> 0.9)
@@ -359,7 +359,7 @@ PLATFORMS
 DEPENDENCIES
   debug
   devise
-  flat_pack (~> 0.1.143)!
+  flat_pack (~> 0.1.246)!
   puma
   recording_studio (~> 4.2)!
   recording_studio_accessible (~> 0.9)!
